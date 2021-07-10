@@ -22,7 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test  --env=./jest-environment-linkedom/jest-environment-linkedom.js --watchAll=false",
+    "test": "react-scripts test  --env=./jest-config/jest-environment-linkedom.js --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
