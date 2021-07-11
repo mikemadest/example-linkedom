@@ -15,6 +15,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "jest-fake-timers": "^1.0.2",
+    "jest-axe": "^4.1.0",
     "jest-mock": "^27.0.6",
     "jest-util": "^27.0.6",
     "linkedom": "^0.11.0"
@@ -22,7 +23,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test  --env=./jest-config/jest-environment-linkedom.js --watchAll=false",
+    "test": "react-scripts test --env=./jest-config/jest-environment-linkedom.js --watchAll=false",
+    "testjsdom": "react-scripts test --watchAll=false",
+    "testlinkedom": "test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
