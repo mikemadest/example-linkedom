@@ -16,14 +16,8 @@ describe("Example App tests", () => {
   it("renders content", () => {
     render(<App />);
 
-
-    // quick experiment: with jsdom matcher is an instance of RegExp but not with linkedom
-    const matcher = /learn react/i;
-    console.log('matcher.constructor.name = ', matcher.constructor.name); // always RegExp as you would expect
-    console.log(`matcher is ${matcher instanceof RegExp ? 'a' : 'NOT'} RegExp`);
-
     expect(
-      screen.getByText(/learn react/i, { exact: false }) // by using exact false it WILL do matcher.test(text) as expected in testing-library-dom
+      screen.getByText(/learn react/i) // by using exact false it WILL do matcher.test(text) as expected in testing-library-dom
     ).toBeInTheDocument();
 
     expect(screen.getByText("Learn React")).toBeInTheDocument();
