@@ -1,6 +1,5 @@
 const { parseHTML } = require("linkedom");
 const NodeEnvironment = require("jest-environment-node");
-const getRootNode = require("./get-root-node-polyfill");
 const getComputedStyle = require("./get-computed-style-polyfill");
 
 /**
@@ -28,22 +27,13 @@ class LinkedomEnvironment extends NodeEnvironment {
       });
     }
 
-    if (!dom.Node.getRootNode) {
-      Object.defineProperty(dom.Node.prototype, "getRootNode", {
-        enumerable: false,
-        configurable: false,
-        value: getRootNode,
-      });
-    }
-
-    // not ideal but Axe needs it in an instanceof test and we just want to avoid an error for now
-    if (!dom.NamedNodeMap) {
-      Object.defineProperty(dom, "NamedNodeMap", {
-        value: function NamedNodeMap() {
-          throw new Error("Illegal constructor");
-        },
-      });
-    }
+    // if (!dom.Node.getRootNode) {
+    //   Object.defineProperty(dom.Node.prototype, "getRootNode", {
+    //     enumerable: false,
+    //     configurable: false,
+    //     value: getRootNode,
+    //   });
+    // }
 
     this.global.window = dom;
     this.global.document = dom.document;

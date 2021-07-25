@@ -1,5 +1,5 @@
 "use strict";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import App from "./App";
 
@@ -20,6 +20,18 @@ describe("Example App tests", () => {
       screen.getByText(/learn react/i) // by using exact false it WILL do matcher.test(text) as expected in testing-library-dom
     ).toBeInTheDocument();
 
-    expect(screen.getByText("Learn React")).toBeInTheDocument();
+    expect(screen.getByText('search')).toBeInTheDocument();
+    expect(screen.queryByText('blah')).not.toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'click me!' }),
+    ).toBeInTheDocument();
   });
+
+  it('should click the button', async () => {
+    fireEvent.click(screen.getByRole('button', { name: /click me!/ }));
+    await waitFor(() => {
+      expect(screen.getByText('notification is here!')).toBeInTheDocument();
+    })
+  });
+
 });

@@ -3,6 +3,9 @@ import Content from "./Content/Content";
 import "./App.css";
 
 function App() {
+
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -21,9 +24,10 @@ function App() {
       </header>
       <Content
         onAction={() => {
-          console.log("button was clicked");
+          setIsOpen(true);
         }}
       />
+      {isOpen && <p>notification is here!</p>}
     </div>
   );
 }
