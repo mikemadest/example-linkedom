@@ -6,3 +6,10 @@
 # production
 /build
 
+.DS_Store
+.svn
+.*.swp
+.eslintcache
+gmon.out
+v8.log
+npm-debug.log*
