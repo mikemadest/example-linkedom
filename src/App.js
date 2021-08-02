@@ -1,9 +1,9 @@
-import logo from "./logo.svg";
-import Content from "./Content/Content";
-import "./App.css";
+import {useState} from 'react';
+import logo from './logo.svg';
+import Content from './Content/Content';
+import './App.css';
 
 function App() {
-
   const [isOpen, setIsOpen] = useState(false);
 
   return (

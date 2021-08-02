@@ -1,6 +1,7 @@
 const { parseHTML } = require("linkedom");
 const NodeEnvironment = require("jest-environment-node");
 const getComputedStyle = require("./get-computed-style-polyfill");
+const getRootNode = require("./get-root-node-polyfill");
 
  const localStorage = {
   data: {},
@@ -45,6 +46,13 @@ class LinkedomEnvironment extends NodeEnvironment {
         value: localStorage,
       });
     }
+
+    // to be removed when this is fixed in linkedom
+    Object.defineProperty(dom.Node.prototype, "getRootNode", {
+      enumerable: false,
+      configurable: false,
+      value: getRootNode,
+    });
 
     if (!dom.getComputedStyle) {
       Object.defineProperty(dom, "getComputedStyle", {
