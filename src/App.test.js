@@ -14,7 +14,7 @@ describe("Example App tests", () => {
   it("renders content", async () => {
     render(<App />);
 
-    expect(screen.getByText("Learn React")).toBeInTheDocument();
+    expect(screen.getByText(/Learn/)).toBeInTheDocument();
     expect(screen.queryByText("blah")).not.toBeInTheDocument();
   });
 });

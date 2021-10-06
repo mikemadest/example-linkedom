@@ -1,20 +1,16 @@
 const { parseHTML } = require("linkedom");
-const { ModuleMocker } = require("jest-mock");
 const NodeEnvironment = require("jest-environment-node");
-const JestUtil = require("jest-util");
-const VM = require("vm");
 
 class LinkedomEnvironment extends NodeEnvironment {
   constructor(config, options) {
     super(config, options);
-    const { window } = parseHTML(
+    const dom = parseHTML(
       '<!doctype html><html lang="en"><head /><body /></html>'
     );
-    this.global = window;
 
-    window.location = {};
+    dom.location = {};
 
-    Object.defineProperty(window.Node.prototype, "getRootNode", {
+    Object.defineProperty(dom.Node.prototype, "getRootNode", {
       enumerable: false,
       configurable: false,
       value: function () {
@@ -24,24 +20,9 @@ class LinkedomEnvironment extends NodeEnvironment {
       },
     });
 
-    this.moduleMocker = new ModuleMocker(this.global);
-    VM.createContext(this.global);
-    JestUtil.installCommonGlobals(this.global, config.globals);
-  }
-
-  async setup() {}
-
-  async teardown() {
-    this.global = null;
-    this.moduleMocker = null;
-  }
-
-  runScript(script) {
-    return script.runInContext(this.global);
-  }
-
-  getVmContext() {
-    return this.global;
+    this.global.window = dom;
+    this.global.document = dom.document;
+    this.global.navigator = dom.navigator;
   }
 }
 module.exports = LinkedomEnvironment;
