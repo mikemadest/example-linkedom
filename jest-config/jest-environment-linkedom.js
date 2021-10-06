@@ -11,6 +11,19 @@ class LinkedomEnvironment extends NodeEnvironment {
       '<!doctype html><html lang="en"><head /><body /></html>'
     );
     this.global = window;
+
+    window.location = {};
+
+    Object.defineProperty(window.Node.prototype, "getRootNode", {
+      enumerable: false,
+      configurable: false,
+      value: function () {
+        let root = this;
+        while (root.parentNode) root = root.parentNode;
+        return root;
+      },
+    });
+
     this.moduleMocker = new ModuleMocker(this.global);
     VM.createContext(this.global);
     JestUtil.installCommonGlobals(this.global, config.globals);
