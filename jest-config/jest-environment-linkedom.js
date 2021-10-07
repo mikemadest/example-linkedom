@@ -1,7 +1,5 @@
 const { parseHTML } = require("linkedom");
-const { ModuleMocker } = require("jest-mock");
 const NodeEnvironment = require("jest-environment-node");
-const JestUtil = require("jest-util");
 const VM = require("vm");
 
 class LinkedomEnvironment extends NodeEnvironment {
@@ -24,16 +22,13 @@ class LinkedomEnvironment extends NodeEnvironment {
       },
     });
 
-    this.moduleMocker = new ModuleMocker(this.global);
     VM.createContext(this.global);
-    JestUtil.installCommonGlobals(this.global, config.globals);
   }
 
   async setup() {}
 
   async teardown() {
     this.global = null;
-    this.moduleMocker = null;
   }
 
   runScript(script) {
