@@ -11,8 +11,6 @@ class LinkedomEnvironment extends NodeEnvironment {
     dom.location = {};
 
     Object.defineProperty(dom.Node.prototype, "getRootNode", {
-      enumerable: false,
-      configurable: false,
       value: function () {
         let root = this;
         while (root.parentNode) root = root.parentNode;
