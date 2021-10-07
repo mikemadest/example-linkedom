@@ -5,14 +5,14 @@ const VM = require("vm");
 class LinkedomEnvironment extends NodeEnvironment {
   constructor(config, options) {
     super(config, options);
-    const { window } = parseHTML(
+    const dom = parseHTML(
       '<!doctype html><html lang="en"><head /><body /></html>'
     );
-    this.global = window;
+    this.global = dom;
 
-    window.location = {};
+    dom.location = {};
 
-    Object.defineProperty(window.Node.prototype, "getRootNode", {
+    Object.defineProperty(dom.Node.prototype, "getRootNode", {
       enumerable: false,
       configurable: false,
       value: function () {
